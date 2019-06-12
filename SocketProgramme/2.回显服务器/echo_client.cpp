@@ -1,10 +1,10 @@
 #include "udp_client.hpp"
 
-int main(int argc, char* argv[])
+int main()
 {
-    (void)argc;
-    UdpClient client(argv[1], 9090);
+    UdpClient client("47.101.192.120", 9090);
 
+    std::cout << "欢迎使用回显服务器！" << std::endl;
     while (true)
     {
         std::cout << "请输入一段内容：";
