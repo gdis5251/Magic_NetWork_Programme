@@ -43,7 +43,7 @@ public:
             {
                 // a. 读取请求
                 std::string req;
-                int r = client_socket.RecvFrom(&req);
+                int r = client_socket.Recv(&req);
 
                 if (r < 0)
                 {

@@ -1,5 +1,6 @@
 #include <unordered_map>
-#include "tcp_server.hpp"
+// #include "tcp_server.hpp"
+#include "tcp_thread_server.hpp"
 
 int main()
 {
@@ -9,8 +10,8 @@ int main()
     dict.insert(std::make_pair("ALiBaBa", "阿里巴巴"));
     dict.insert(std::make_pair("Tencent", "腾讯"));
     dict.insert(std::make_pair("typedance", "字节跳动"));
-    TcpServer server;
-    server.start("0", 9090, [&dict](const std::string& req, std::string* resp)
+    TcpThreadServer server;
+    server.start("0.0.0.0", 9090, [&dict](const std::string& req, std::string* resp)
                  {
                     auto it = dict.find(req);
                     if (it == dict.end())

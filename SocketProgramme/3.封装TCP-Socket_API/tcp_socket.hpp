@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <sys/types.h>
 
 
 class TcpSocket
@@ -40,7 +41,8 @@ public:
     {
         sockaddr_in addr;
         addr.sin_family = AF_INET;
-        addr.sin_addr.s_addr = inet_addr(ip.c_str());
+        // addr.sin_addr.s_addr = inet_addr(ip.c_str());
+        addr.sin_addr.s_addr = htons(INADDR_ANY);
         addr.sin_port = htons(port);
 
         int ret = bind(fd_, (sockaddr*)&addr, sizeof(addr));
@@ -49,7 +51,6 @@ public:
             perror("bind");
             return false;
         }
-        std::cout << "bind success!" << std::endl;
 
         return true;
     }
@@ -110,7 +111,7 @@ public:
     }
 
 
-    int RecvFrom(std::string* msg)
+    int Recv(std::string* msg)
     {
         msg->clear();
         char buf[10 * 1024] = {0};

@@ -21,7 +21,7 @@ public:
 
     int Recv(std::string* msg)
     {
-        return sock_.RecvFrom(msg);
+        return sock_.Recv(msg);
     }
 
     bool Send(const std::string& resp)

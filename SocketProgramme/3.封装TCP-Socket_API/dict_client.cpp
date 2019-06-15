@@ -2,14 +2,14 @@
 
 int main(int argc, char* argv[])
 {
-    if (argc < 2)
-    {
-        std::cout << "error input!" << std::endl;
-        std::cout << "You should: ./server xxx.xxx.xxx.xxx";
-        return 1;
-    }
+    // if (argc < 2)
+    // {
+    //     std::cout << "error input!" << std::endl;
+    //     std::cout << "You should: ./server xxx.xxx.xxx.xxx";
+    //     return 1;
+    // }
     TcpClient client;
-    int ret = client.Connect(argv[1], 9090);
+    int ret = client.Connect();
     if (ret < 0)
     {
         std::cout << "Connect Failed !" << std::endl;
@@ -36,3 +36,4 @@ int main(int argc, char* argv[])
 
     return 0;
 }
+
