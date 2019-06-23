@@ -1,3 +1,4 @@
+#include <vector>
 #include <jsoncpp/json/json.h>
 #include "tcp_thread_server.hpp"
 
@@ -11,19 +12,22 @@ void CalServer(const std::string& req, std::string* resp)
     reader.parse(req, req_value);
 
     // 然后把键值对中的值拿出来
-    int num1 = req_value["num1"].asInt();
-    int num2 = req_value["num2"].asInt();
+    std::vector<int> nums;
+    for (int i = 0; i < req_value["nums"].size(); i++)
+    {
+        nums.push_back(req_value["nums"][i].asInt());
+    }
     std::string op = req_value["op"].asString();
 
     // 计算结果
     int ret = 0;
     if (op == "+")
     {
-        ret = num1 + num2;
+        ret = nums[0] + nums[1];
     }
     else if (op == "-")
     {
-        ret = num1 - num2;
+        ret = nums[0] - nums[1];
     }
 
     // 序列化

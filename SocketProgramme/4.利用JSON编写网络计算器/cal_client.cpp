@@ -14,10 +14,10 @@ int main(void)
     {
         // 序列化
         Json::Value req_value;
-        Json::StyledWriter writer;
+        Json::FastWriter writer;
 
-        req_value["num1"] = num1;
-        req_value["num2"] = num2;
+        req_value["nums"].append(num1);
+        req_value["nums"].append(num2);
         req_value["op"] = op;
 
         std::string req = writer.write(req_value);
