@@ -15,12 +15,13 @@ int main(void)
     server.start("0", 9090, [](const std::string& req, std::string* resp, 
                     TcpSocket client_sock)
     {
-        std::string first_line("HTTP/1.1 200 OK\r\n");
+        std::string first_line("HTTP/1.1 302 Found\r\n");
         std::string body("<html><body><h1>I Love You.</h1></body></html>");
        
         std::stringstream header;
         header << "Content-Length: " << body.size() << "\r\n";
         header << "Content-Type: " << "text/html\r\n";
+        header << "loaction: " << "www.github.com\r\n";
 
         std::string blank("\r\n");
 
