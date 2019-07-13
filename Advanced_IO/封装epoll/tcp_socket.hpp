@@ -7,6 +7,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/types.h>
+#include <fcntl.h>
 
 
 class TcpSocket
@@ -14,6 +15,10 @@ class TcpSocket
 public:
     TcpSocket()
         :fd_(-1)
+    {}
+
+    TcpSocket(int fd)
+        :fd_(fd)
     {}
 
     bool Socket()
@@ -26,6 +31,12 @@ public:
         }
 
         return true;
+    }
+
+    bool SetNonBlock()
+    {
+        int flag = fcntl(fd_, F_GETFL, 0);
+        fcntl(fd_, F_SETFL, flag | O_NONBLOCK);
     }
 
     bool Close()
@@ -170,7 +181,7 @@ public:
         fd_ = sockfd;
     }
 
-    int GetFd()
+    int GetFd() const 
     {
         return fd_;
     }
